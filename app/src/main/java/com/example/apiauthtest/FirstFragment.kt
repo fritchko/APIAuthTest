@@ -57,6 +57,8 @@ class FirstFragment : Fragment() {
 
             if (currentData != null){
                 binding.weatherText.text = "Temperatura: ${currentData.tempC?.toInt()}°"
+                binding.conditionText.text = currentData.condition?.text
+                binding.windTv.text = "${currentData.windDir} ${currentData.windKph}km/h"
             } else{
                 binding.weatherText.text = "No data available."
             }
@@ -64,6 +66,8 @@ class FirstFragment : Fragment() {
             if (locationData != null){
                 binding.locationText.text = "${locationData.name}, ${locationData.region}"
             }
+
+
 
         }
     }

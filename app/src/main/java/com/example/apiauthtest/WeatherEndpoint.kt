@@ -9,6 +9,7 @@ interface WeatherEndpoint {
     @GET("current.json")
     suspend fun getWeather(
         @Query("q") query: String,
-        @Query("key") apiKey: String
+        @Query("key") apiKey: String,
+        @Query("lang") language: String
     ): Response<WeatherData>
 }

@@ -15,7 +15,7 @@ object WeatherRepo {
             weatherEndpoint = createRetrofitInstance().create(WeatherEndpoint::class.java)
         }
 
-        return weatherEndpoint?.getWeather("Palermo", "9c8c0eb6b72342dfb6435321231309")
+        return weatherEndpoint?.getWeather("Naro IT", "9c8c0eb6b72342dfb6435321231309","it")
     }
 
 

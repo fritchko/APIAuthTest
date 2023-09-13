@@ -33,7 +33,7 @@ data class Current(
     @SerializedName("pressure_mb")
     val pressureMb: Int?,
     @SerializedName("temp_c")
-    val tempC: Double?,
+    val tempC: Int?,
     @SerializedName("temp_f")
     val tempF: Double?,
     @SerializedName("uv")
@@ -47,7 +47,7 @@ data class Current(
     @SerializedName("wind_dir")
     val windDir: String?,
     @SerializedName("wind_kph")
-    val windKph: Int?,
+    val windKph: Double?,
     @SerializedName("wind_mph")
     val windMph: Double?
 )

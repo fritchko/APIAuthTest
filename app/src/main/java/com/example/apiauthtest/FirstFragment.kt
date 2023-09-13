@@ -1,5 +1,6 @@
 package com.example.apiauthtest
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +56,7 @@ class FirstFragment : Fragment() {
             val locationData = weatherData?.location
 
             if (currentData != null){
-                binding.weatherText.text = "Temperatura: ${currentData.tempC}°"
+                binding.weatherText.text = "Temperatura: ${currentData.tempC?.toInt()}°"
             } else{
                 binding.weatherText.text = "No data available."
             }

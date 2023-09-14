@@ -1,4 +1,4 @@
-package com.example.apiauthtest
+package com.example.apiauthtest.data
 
 
 import com.google.gson.annotations.SerializedName

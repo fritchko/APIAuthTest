@@ -1,8 +1,8 @@
-package com.example.apiauthtest
+package com.example.apiauthtest.retrofit
 
+import com.example.apiauthtest.data.WeatherData
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface WeatherEndpoint {

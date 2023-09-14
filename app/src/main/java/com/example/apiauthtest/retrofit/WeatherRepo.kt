@@ -1,5 +1,6 @@
-package com.example.apiauthtest
+package com.example.apiauthtest.retrofit
 
+import com.example.apiauthtest.data.WeatherData
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response

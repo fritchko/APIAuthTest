@@ -56,5 +56,8 @@ dependencies {
     //OKHTTP LOGGING INTERCEPTOR
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
 
+    //PICASSO - IMAGE LOADING
+    implementation 'com.squareup.picasso:picasso:2.8'
+
 
 }

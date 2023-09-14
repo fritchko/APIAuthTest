@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.apiauthtest.retrofit.WeatherViewModel
 import com.example.apiauthtest.databinding.FragmentFirstBinding
+import com.squareup.picasso.Picasso
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -55,10 +56,24 @@ class FirstFragment : Fragment() {
             val currentData = weatherData?.current
             val locationData = weatherData?.location
 
-            if (currentData != null){
+            if (currentData != null) {
                 binding.weatherText.text = "Temperatura: ${currentData.tempC?.toInt()}°"
                 binding.conditionText.text = currentData.condition?.text
                 binding.windTv.text = "${currentData.windDir} ${currentData.windKph}km/h"
+
+                val iconUrl = currentData.condition?.icon
+
+                // Check if the URL is relative (starts with "//")
+                val imageUrl = if (iconUrl?.startsWith("//") == true) {
+                    "https:$iconUrl"
+                } else {
+                    iconUrl
+                }
+
+                Picasso.get()
+                    .load(imageUrl)
+                    .error(com.google.android.material.R.drawable.mtrl_ic_error)
+                    .into(binding.weatherImage)
             } else{
                 binding.weatherText.text = "No data available."
             }

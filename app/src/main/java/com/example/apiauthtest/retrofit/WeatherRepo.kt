@@ -16,7 +16,7 @@ object WeatherRepo {
             weatherEndpoint = createRetrofitInstance().create(WeatherEndpoint::class.java)
         }
 
-        return weatherEndpoint?.getWeather("Naro IT", "9c8c0eb6b72342dfb6435321231309","it")
+        return weatherEndpoint?.getWeather("Naro IT","it")
     }
 
 
@@ -24,9 +24,11 @@ object WeatherRepo {
 
         val baseUrl = "https://api.weatherapi.com/v1/"
         val loggingInterceptor = HttpLoggingInterceptor()
+        val authInterceptor = AuthInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val httpClient = OkHttpClient.Builder()
+            .addInterceptor(authInterceptor)
             .addInterceptor(loggingInterceptor)
             .build()
 

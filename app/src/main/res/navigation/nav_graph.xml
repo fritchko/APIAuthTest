@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.apiauthtest.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:label="TEST API"
         tools:layout="@layout/fragment_first">
     </fragment>
 </navigation>

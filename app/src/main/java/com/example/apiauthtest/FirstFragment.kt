@@ -2,9 +2,11 @@ package com.example.apiauthtest
 
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.apiauthtest.databinding.FragmentFirstBinding
@@ -40,15 +42,17 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.submitButton.setOnClickListener {
+        binding.editTextFirst.setOnEditorActionListener{ _, actionId, keyEvent ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER){
             val newQuery = binding.editTextFirst.text.toString()
             weatherViewModel.updateQuery(newQuery)
             // The order of execution matters here
             observeLiveData()
             weatherViewModel.getWeather()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
         }
-
-
 
     }
 

@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.apiauthtest.retrofit.WeatherViewModel
 import com.example.apiauthtest.databinding.FragmentFirstBinding
+import com.example.apiauthtest.retrofit.WeatherViewModel
 import com.squareup.picasso.Picasso
 
 /**
@@ -38,16 +37,23 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.submitButton.setOnClickListener {
+            val newQuery = binding.editTextFirst.text.toString()
+            weatherViewModel.updateQuery(newQuery)
+            // The order of execution matters here
+            observeLiveData()
             weatherViewModel.getWeather()
         }
-
-        observeLiveData()
 
 
 
     }
 
-    fun observeLiveData(){
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    fun observeLiveData() {
         weatherViewModel.result.observe(viewLifecycleOwner) { weatherData ->
             val currentData = weatherData?.current
             val locationData = weatherData?.location
@@ -70,21 +76,13 @@ class FirstFragment : Fragment() {
                     .load(imageUrl)
                     .error(com.google.android.material.R.drawable.mtrl_ic_error)
                     .into(binding.weatherImage)
-            } else{
+            } else {
                 binding.weatherText.text = "No data available."
             }
 
-            if (locationData != null){
+            if (locationData != null) {
                 binding.locationText.text = "${locationData.name}, ${locationData.region}"
             }
-
-
-
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

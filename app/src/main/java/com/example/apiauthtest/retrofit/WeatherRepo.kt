@@ -11,12 +11,12 @@ object WeatherRepo {
 
     var weatherEndpoint: WeatherEndpoint? = null
 
-    suspend fun getWeather(): Response<WeatherData>? {
+    suspend fun getWeather(query: String, language: String): Response<WeatherData>? {
         if (weatherEndpoint == null) {
             weatherEndpoint = createRetrofitInstance().create(WeatherEndpoint::class.java)
         }
 
-        return weatherEndpoint?.getWeather("Naro IT","it")
+        return weatherEndpoint?.getWeather(query,language)
     }
 
 

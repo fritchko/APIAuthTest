@@ -1,20 +1,27 @@
 package com.example.apiauthtest.retrofit
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.apiauthtest.data.Location
 import com.example.apiauthtest.data.WeatherData
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
 class WeatherViewModel: ViewModel() {
     val result = MutableLiveData<WeatherData?>()
+    private var currentQuery = ""
 
-    fun getWeather(){
+    fun updateQuery(newQuery: String){
+        currentQuery = newQuery
+        getWeather()
+    }
 
+    fun getWeather() {
         viewModelScope.launch(IO){
-            var response = WeatherRepo.getWeather()
+            var response = WeatherRepo.getWeather(currentQuery, "it")
             if (response?.isSuccessful == true) {
                 val currentData = response.body()?.current
                 val locationData = response.body()?.location
@@ -27,6 +34,5 @@ class WeatherViewModel: ViewModel() {
                 Log.e("NETWORK ERROR","Network Call failed")
             }
         }
-
     }
 }

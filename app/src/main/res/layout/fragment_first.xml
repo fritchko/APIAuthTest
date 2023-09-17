@@ -6,6 +6,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="16dp">
 
+    <EditText
+        android:id="@+id/edit_text_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="Scrivi qui il nome della tua città"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <TextView
         android:id="@+id/location_text"
         android:layout_width="wrap_content"

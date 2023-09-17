@@ -42,16 +42,16 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.editTextFirst.setOnEditorActionListener{ _, actionId, keyEvent ->
-            if (actionId == EditorInfo.IME_ACTION_DONE || keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER){
+        binding.editTextFirst.setOnKeyListener{ _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN){
             val newQuery = binding.editTextFirst.text.toString()
             weatherViewModel.updateQuery(newQuery)
             // The order of execution matters here
             observeLiveData()
             weatherViewModel.getWeather()
-                return@setOnEditorActionListener true
+                return@setOnKeyListener true
             }
-            return@setOnEditorActionListener false
+            return@setOnKeyListener false
         }
 
     }

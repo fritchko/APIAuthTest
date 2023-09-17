@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:autofillHints="postalAddress"
             android:singleLine="true"
+            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:hint="Scrivi qui il nome della tua città" />
     </androidx.cardview.widget.CardView>
 

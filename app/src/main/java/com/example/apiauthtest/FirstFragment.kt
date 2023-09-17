@@ -1,6 +1,7 @@
 package com.example.apiauthtest
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,9 @@ import androidx.fragment.app.viewModels
 import com.example.apiauthtest.databinding.FragmentFirstBinding
 import com.example.apiauthtest.retrofit.WeatherViewModel
 import com.squareup.picasso.Picasso
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -59,6 +63,9 @@ class FirstFragment : Fragment() {
             val locationData = weatherData?.location
 
             if (currentData != null) {
+
+
+
                 binding.weatherText.text = "Temperatura: ${currentData.tempC?.toInt()}°"
                 binding.conditionText.text = currentData.condition?.text
                 binding.windTv.text = "${currentData.windDir} ${currentData.windKph}km/h"
@@ -81,8 +88,25 @@ class FirstFragment : Fragment() {
             }
 
             if (locationData != null) {
-                binding.locationText.text = "${locationData.name}, ${locationData.region}"
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+                val outputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+                binding.locationText.text = "${locationData.name}, ${locationData.region} ${locationData.localtime?.formatToLocalTime()}"
+
+
             }
+        }
+    }
+
+    fun String?.formatToLocalTime(): String{
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+        return try{
+            val date = inputFormat.parse(this)
+            outputFormat.format(date)
+        } catch (e: Exception){
+            "N/A"
         }
     }
 }

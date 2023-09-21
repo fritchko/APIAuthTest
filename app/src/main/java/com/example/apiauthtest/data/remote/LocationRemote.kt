@@ -1,9 +1,9 @@
-package com.example.apiauthtest.data
+package com.example.apiauthtest.data.remote
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Location(
+data class LocationRemote(
     @SerializedName("country")
     val country: String?,
     @SerializedName("lat")

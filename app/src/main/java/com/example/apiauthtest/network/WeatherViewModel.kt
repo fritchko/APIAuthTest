@@ -1,17 +1,18 @@
-package com.example.apiauthtest.retrofit
+package com.example.apiauthtest.network
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.apiauthtest.data.Location
-import com.example.apiauthtest.data.WeatherData
+import com.example.apiauthtest.data.local.WeatherDataLocal
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
-class WeatherViewModel: ViewModel() {
-    val result = MutableLiveData<WeatherData?>()
+class WeatherViewModel(): ViewModel() {
+    private val _result = MutableLiveData<WeatherDataLocal?>()
+    val result: LiveData<WeatherDataLocal?>
+        get() = _result
     private var currentQuery = ""
 
     fun updateQuery(newQuery: String){
@@ -22,11 +23,11 @@ class WeatherViewModel: ViewModel() {
     fun getWeather() {
         viewModelScope.launch(IO){
             var response = WeatherRepo.getWeather(currentQuery, "it")
-            if (response?.isSuccessful == true) {
-                val currentData = response.body()?.current
-                val locationData = response.body()?.location
-                val weatherData = WeatherData(current = currentData, location = locationData)
-                result.postValue(weatherData)
+            if (response is ResponseWrapper.Success) {
+                val currentData = response.value?.current
+                val locationData = response.value?.location
+                val weatherDataLocal = WeatherDataLocal(current = currentData, location = locationData)
+                _result.postValue(weatherDataLocal)
                 Log.i("CURRENT DATA:", "$currentData")
                 Log.i("LOCATION DATA:", "$locationData")
 

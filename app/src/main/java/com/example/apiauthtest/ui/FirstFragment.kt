@@ -1,16 +1,15 @@
-package com.example.apiauthtest
+package com.example.apiauthtest.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.apiauthtest.databinding.FragmentFirstBinding
-import com.example.apiauthtest.retrofit.WeatherViewModel
+import com.example.apiauthtest.domain.formatToLocalTime
+import com.example.apiauthtest.network.WeatherViewModel
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -102,15 +101,5 @@ class FirstFragment : Fragment() {
         }
     }
 
-    fun String?.formatToLocalTime(): String{
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
-        val outputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
-        return try{
-            val date = inputFormat.parse(this)
-            outputFormat.format(date)
-        } catch (e: Exception){
-            "N/A"
-        }
-    }
 }

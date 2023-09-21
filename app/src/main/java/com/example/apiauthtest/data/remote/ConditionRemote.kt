@@ -1,9 +1,9 @@
-package com.example.apiauthtest.data
+package com.example.apiauthtest.data.remote
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Condition(
+data class ConditionRemote(
     @SerializedName("code")
     val code: Int?,
     @SerializedName("icon")

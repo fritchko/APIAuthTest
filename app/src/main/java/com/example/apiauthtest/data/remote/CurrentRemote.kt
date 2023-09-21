@@ -1,13 +1,13 @@
-package com.example.apiauthtest.data
+package com.example.apiauthtest.data.remote
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Current(
+data class CurrentRemote(
     @SerializedName("cloud")
     val cloud: Int?,
     @SerializedName("condition")
-    val condition: Condition?,
+    val condition: ConditionRemote?,
     @SerializedName("feelslike_c")
     val feelslikeC: Double?,
     @SerializedName("feelslike_f")

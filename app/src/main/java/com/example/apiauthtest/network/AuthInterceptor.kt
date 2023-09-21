@@ -1,4 +1,4 @@
-package com.example.apiauthtest.retrofit
+package com.example.apiauthtest.network
 
 import okhttp3.Interceptor
 import okhttp3.Response
